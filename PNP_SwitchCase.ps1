@@ -5,16 +5,16 @@ function PRIV {
         switch -Regex ($DEVICE.Status) {
             {$PSItem -match "OK"} {
                 switch -Regex ($DEVICE.InstanceId, $DEVICE.Class, $DEVICE.FriendlyName) {
-                    # Bluetooth Class
+                    #Bluetooth Class
                     'Bluetooth' {Write-Output "ENABLED Match on: Bluetooth | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                    # Apple
+                    #Apple
                     'VID_05AC' {Write-Output "ENABLED Match on: VID_05AC - Apple | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                    # Galaxy
+                    #Galaxy
                     'VID_04E8&PID_6860' {Write-Output "ENABLED Match on: VID_04E8&PID_6860 - Galaxy | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                             Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false} 
-                    # Google
+                    #Google
                     'VID_18D1' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_2D..' {Write-Output "ENABLED Match on: VID_18D1 - Google | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
@@ -27,7 +27,7 @@ function PRIV {
                                                 Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
                         }
                     }
-                    # LG
+                    #LG
                     'VID_1004' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_6...' {Write-Output "ENABLED Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
@@ -38,20 +38,20 @@ function PRIV {
                                             Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
                         }
                     }
-                    # MOTOROLA
+                    #MOTOROLA
                     'VID_22B8' {Write-Output "ENABLED Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
                 }                
             }
             {$PSItem -notmatch "OK"} {
                 switch -Regex ($DEVICE.InstanceId, $DEVICE.Class, $DEVICE.FriendlyName) {
-                    # Bluetooth Class
+                    #Bluetooth Class
                     'Bluetooth' {Write-Output "ERROR/UNKOWN Match on: Bluetooth | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                    # Apple
+                    #Apple
                     'VID_05AC' {Write-Output "ERROR/UNKOWN Match on: VID_05AC - Apple | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                    # Galaxy
+                    #Galaxy
                     'VID_04E8&PID_6860' {Write-Output "ERROR/UNKOWN Match on: VID_04E8&PID_6860 - Galaxy | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                    # Google
+                    #Google
                     'VID_18D1' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_2D..' {Write-Output "ERROR/UNKOWN Match on: VID_18D1 - Google | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
@@ -60,7 +60,7 @@ function PRIV {
                             'PID_D[01]0.' {Write-Output "ERROR/UNKOWN Match on: VID_18D1 - Google | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
                         }
                     }
-                    # LG
+                    #LG
                     'VID_1004' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_6...' {Write-Output "ERROR/UNKOWN Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
@@ -68,7 +68,7 @@ function PRIV {
                             'PID_9...' {Write-Output "ERROR/UNKOWN Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
                         }
                     }
-                    # MOTOROLA
+                    #MOTOROLA
                     'VID_22B8' {Write-Output "ERROR/UNKOWN Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
                 }                
             }
@@ -82,16 +82,16 @@ function NONPRIV {
         switch -Regex ($DEVICE.Status) {
             {$PSItem -match "OK"} {
                 switch -Regex ($DEVICE.InstanceId, $DEVICE.Class, $DEVICE.FriendlyName) {
-                    # Bluetooth Class
+                    #Bluetooth Class
                     'Bluetooth' {Write-Output "ENABLED Match on: Bluetooth | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                    # Apple
+                    #Apple
                     'VID_05AC' {Write-Output "ENABLED Match on: VID_05AC - Apple | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                    # Galaxy
+                    #Galaxy
                     'VID_04E8&PID_6860' {Write-Output "ENABLED Match on: VID_04E8&PID_6860 - Galaxy | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                             Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                    # Google
+                    #Google
                     'VID_18D1' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_2D..' {Write-Output "ENABLED Match on: VID_18D1 - Google | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
@@ -104,7 +104,7 @@ function NONPRIV {
                                                 Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
                         }
                     }
-                    # LG
+                    #LG
                     'VID_1004' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_6...' {Write-Output "ENABLED Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
@@ -115,10 +115,10 @@ function NONPRIV {
                                             Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
                         }
                     }
-                    # MOTOROLA
+                    #MOTOROLA
                     'VID_22B8' {Write-Output "ENABLED Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                    # Fujitsu
+                    #Fujitsu
                     'VID_04C5' {Write-Output "ENABLED Match on: VID_04C5 - Fujitsu | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
                     'USBPRINT' {
@@ -128,13 +128,13 @@ function NONPRIV {
                     }
                     'USBDevice' {
                         switch -Regex ($DEVICE.InstanceId) {
-                            # Lexmark
+                            #Lexmark
                             'VID_043D&PID_0270' {Write-Output "ENABLED Match on: USBDevice - Lexmark | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                            # Dell
+                            #Dell
                             'VID_413C' {Write-Output "ENABLED Match on: USBDevice - Dell | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
                                             Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
-                            # HP
+                            #HP
                             'VID_03F0' { 
                                 switch -Regex ($DEVICE.InstanceId) {
                                     'PID_852A' {Write-Output "ENABLED Match on: USBDevice - HP | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"
@@ -151,7 +151,7 @@ function NONPRIV {
                                                     Disable-PnpDevice -InstanceId $DEVICE.InstanceId -Confirm:$false}
                                 }
                             }
-                            # Software Device Scanner
+                            #Software Device Scanner
                             'SWD\\ESCL' {
                                 if ($DEVICE.Class -eq "Image" -or
                                     $DEVICE.Class -eq "Printer" -or
@@ -168,13 +168,13 @@ function NONPRIV {
             } 
             {$PSItem -notmatch "OK"} {
                 switch -Regex ($DEVICE.InstanceId, $DEVICE.Class, $DEVICE.FriendlyName) {
-                    # Bluetooth Class
+                    #Bluetooth Class
                     'Bluetooth' {Write-Output "ERROR/UNKOWN Match on: Bluetooth | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                    # Apple
+                    #Apple
                     'VID_05AC' {Write-Output "ERROR/UNKOWN Match on: VID_05AC - Apple | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                    # Galaxy
+                    #Galaxy
                     'VID_04E8&PID_6860' {Write-Output "ERROR/UNKOWN Match on: VID_04E8&PID_6860 - Galaxy | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                    # Google
+                    #Google
                     'VID_18D1' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_2D..' {Write-Output "ERROR/UNKOWN Match on: VID_18D1 - Google | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
@@ -183,7 +183,7 @@ function NONPRIV {
                             'PID_D[01]0.' {Write-Output "ERROR/UNKOWN Match on: VID_18D1 - Google | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
                         }
                     }
-                    # LG
+                    #LG
                     'VID_1004' {
                         switch -Regex ($DEVICE.InstanceId) {
                             'PID_6...' {Write-Output "ERROR/UNKOWN Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
@@ -191,9 +191,9 @@ function NONPRIV {
                             'PID_9...' {Write-Output "ERROR/UNKOWN Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
                         }
                     }
-                    # MOTOROLA
+                    #MOTOROLA
                     'VID_22B8' {Write-Output "ERROR/UNKOWN Match on: VID_1004 - LG | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                    # Fujitsu
+                    #Fujitsu
                     'VID_04C5' {Write-Output "ERROR/UNKOWN Match on: VID_04C5 - Fujitsu | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
                     'USBPRINT' {
                         if ($DEVICE.InstanceId -notmatch "DYMO") {
@@ -201,11 +201,11 @@ function NONPRIV {
                     }
                     'USBDevice' {
                         switch -Regex ($DEVICE.InstanceId) {
-                            # Lexmark
+                            #Lexmark
                             'VID_043D&PID_0270' {Write-Output "ERROR/UNKOWN Match on: USBDevice - Lexmark | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                            # Dell
+                            #Dell
                             'VID_413C' {Write-Output "ERROR/UNKOWN Match on: USBDevice - Dell | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
-                            # HP
+                            #HP
                             'VID_03F0' {
                                 switch -Regex ($DEVICE.InstanceId) {
                                     'PID_852A' {Write-Output "ERROR/UNKOWN Match on: USBDevice - HP | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
@@ -216,7 +216,7 @@ function NONPRIV {
                                     'PID_0773' {Write-Output "ERROR/UNKOWN Match on: USBDevice - HP | CLASS: $($DEVICE.Class), INSTANCE: $($DEVICE.InstanceId), NAME: $($DEVICE.FriendlyName), STATUS: $($DEVICE.Status)"}
                                 }
                             }
-                            # Software Device Scanner
+                            #Software Device Scanner
                             'SWD\\ESCL' {
                                 if ($DEVICE.Class -eq "Image" -or
                                     $DEVICE.Class -eq "Printer" -or
