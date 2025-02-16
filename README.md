@@ -1,5 +1,17 @@
 # PowerShell-and-Forescout
-With a service account in the appropriate AD security group granting administrator privileges on Windows clients, and the Forescout SecureConnector application installed on those clients - it is possible to integrate PowerShell in a multitude of ways. I had been leveraging PowerShell scripts in Forescout Policies for a few months when I realized that the repository in Forescout was becoming cluttered and version control was growing cumbersome. I had been creating PowerShell scripts unique to each individual policy. The scripts in this repository are the product of my efforts to deconflict Forescout Policy and PowerShell scripts. I sought to create scripts which were modular and easily extendable for new requirements. This would allow essentially 3 scripts. One to perform discoveries, one to manage installed or running software, and one to manage installed or active usb devices. 
+With a service account in an AD security group granting administrator privileges on Windows clients, and the Forescout SecureConnector application installed on those clients - it is possible to integrate PowerShell through Forescout in a multitude of ways.   
+
+I had been leveraging PowerShell scripts in Forescout policies for a few months when I realized that the script repository in Forescout was becoming cluttered, and version control was growing cumbersome. In those preceding months, I had been creating PowerShell scripts unique to each individual policy.   
+> \> Discover and track logged on users? Script.   
+> \> Discover and remove USB devices? Script.. for *each* USB device.   
+> \> Discover and unistall prohibited software? Script.. for *each* program.   
+> \> Track software versions? Scripts.    
+> \> And so on, and on, and on.    
+
+As you can imagine, this scaled terribly.   
+
+The scripts in this repository are the products from my effort to deconflict Forescout Policy and the use of unique PowerShell scripts. I sought to create scripts which were modular and easily extendable to meet new requirements within their general use-cases. This boiled down to 3 scripts. One to perform discovery and tracking, one to manage installed or running software, and one to manage installed or active USB devices. This enabled Forescout policies to be reshaped as well, resulting in fewer scripts on clients being ran simultanously, or individually throughout a host's time on the network.   
+
 ### [ APP_SwitchCase.ps1 ](https://github.com/plmcdowe/PowerShell-and-Forescout/blob/46b27bdb2193f8ee5286ae92a2f75d76491e80e8/APP_SwitchCase.ps1)
 ```PowerShell
 #EXE file search
