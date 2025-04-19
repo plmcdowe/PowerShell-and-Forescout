@@ -70,6 +70,7 @@ foreach ($PACKAGE in $PACKAGES) {
         #ADD MORE REGEX CASES FOR ADDITIONAL PACKAGES TO UNINSTALL
     }
 }
-```   
----   
+```
+
+
 ### [ PNP_SwitchCase.ps1 ](https://github.com/plmcdowe/PowerShell-and-Forescout/blob/d739a8da5b674ebc42414585801fa1112dd83f2f/PNP_SwitchCase.ps1)
