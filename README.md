@@ -10,64 +10,65 @@ I had been leveraging PowerShell scripts in Forescout policies for a few months 
 
 As you can imagine, this scaled terribly.   
 
-The scripts in this repository are the products from my effort to deconflict Forescout Policy and the use of unique PowerShell scripts. I sought to create scripts which were modular and easily extendable to meet new requirements within their general use-cases. This boiled down to 3 scripts. One to perform discovery and tracking, one to manage installed or running software, and one to manage installed or active USB devices. This enabled Forescout policies to be reshaped as well, resulting in fewer scripts on clients being ran simultanously, or individually throughout a host's time on the network.   
+The 2 scripts in this repository are examples of my effort to deconflict Forescout Policy and the use of unique PowerShell scripts. I sought to create scripts which were modular and easily extendable to meet new requirements within their general use-cases. This boiled down to 2 scripts. One to manage installed or running software, and one to manage installed or active USB devices. This enabled Forescout policies to be reshaped as well, resulting in fewer scripts on clients being ran simultanously, or individually throughout a host's time on the network.   
 
 ### [ APP_SwitchCase.ps1 ](https://github.com/plmcdowe/PowerShell-and-Forescout/blob/46b27bdb2193f8ee5286ae92a2f75d76491e80e8/APP_SwitchCase.ps1)
+The link above redirects to the script in this repository. The outline below demonstrates its use of Regex switch cases and general structure.      
+The script centers around the software type to be uninstalled: `.exe` or `package`.     
+> ---    
+> #### The first foreach loops all user profiles on the host from `$USERS`.
+> ---
+>> #### In each profile, a second foreach loops executables from `$EXE` with:
+>> ---   
+>>> a regex case that checks for and removes prohibited executables,     
+>>> a regex case that checks for and removes prohibited executable installers.
+> ---    
+
+> #### The third switch case checks for prohibited packages on the host.
+> ---    
+
 ```PowerShell
 #EXE file search
 $USERS = Get-ChildItem C:\Users -Directory
 foreach ($USER in $USERS) {
     #searches all user profiles
     $SEARCH = "C:\Users\$($user.Name)"
-    
     #filtered on .exe extensions
     $EXE = Get-ChildItem -Path $SEARCH -Filter *.exe -Recurse -ErrorAction SilentlyContinue -Force
-    #DECLARE ADDITIONAL $VAR EXTENSION SEARCH FILTERS AS NEEDED
-    
     #switch case for all .exe files 
     foreach ($FILE in $EXE) {
         switch -Regex ($FILE.Name) {
-            #case where file name in $FILE.Name is regex match with 'Zoom.exe'
-            'Zoom.exe' {
-                Write-Output "Found: $($FILE.Name)"
-                #static path concat based on known, universal path to zoom uninstaller
+            #case where file name in $FILE.Name is a regex match
+            'UnauthorizedSoftware.exe' {
+                #static path concat based on known, universal path to uninstaller
                 $UNINSTALL = $FILE.DirectoryName.Replace("\bin", "\uninstall\Installer.exe")
                 if (Test-Path $UNINSTALL) {
-                    Write-Output "Uninstalling: $($FILE.Name)"
                     #send the uninstall command
                     Invoke-Command {&$UNINSTALL /uninstall}
-                    Write-Output "Uninstall command sent $($FILE.Name)"
                 }
             }
-            #case where file name in $FILE.Name is regex match with 'ZoomInstaller.exe'
-            'ZoomInstaller.exe' {
-                Write-Output "Found: $($FILE.Name)"
+            #case where file name in $FILE.Name is regex match with 'UnauthorizedSoftwareInstaller.exe'
+            'UnauthorizedSoftwareInstaller.exe' {
                 $PATH = $FILE.DirectoryName
-                Write-Output "Removing: $($FILE.Name)"
-                #delete the Zoom installer
-                Remove-Item -Path $PATH\ZoomInstaller.exe -Force
-                Write-Output "Remove command sent: $($FILE.Name)"                
+                #delete the installer
+                Remove-Item -Path $PATH\UnauthorizedSoftwareInstaller.exe -Force
             }
-            #ADD MORE REGEX CASES ADDITIONAL FOR EXE FILES HERE
+            #add more regex cases for additional exe files here
         }
     }
-    #ADD ADDITIONAL FILE EXTENSION 'foreach' SWITCH CASES HERE
+    #add additional file extension types to 'foreach' loop
 }
-
 #PACKAGE search
 $PACKAGES = Get-Package | Select-Object -Property Name
 foreach ($PACKAGE in $PACKAGES) {
     #switch case for all packages
     switch -Regex ($PACKAGE.Name) {
-        #case where package name is regex match with 'Adobe.*Reader'
-        'Adobe.*Reader' {
-            Write-Output "Found: $($PACKAGE.Name)"
-            Write-Output "Uninstalling: $($PACKAGE.Name)"
+        #case where package name is regex match with 'Prohibited.*PackageName'
+        'Prohibited.*PackageName' {
             #uninstall the package
             Uninstall-Package -Name $PACKAGE.Name
-            Write-Output "Uninstall command sent: $($PACKAGE.Name)"
         }
-        #ADD MORE REGEX CASES FOR ADDITIONAL PACKAGES TO UNINSTALL
+        #add more cases for additional packages to uninstall
     }
 }
 ```
