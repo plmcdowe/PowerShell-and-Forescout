@@ -18,8 +18,8 @@ The script centers around the software type to be uninstalled: `.exe` or `packag
 
 > <b>The first foreach loops all user profiles on the host from `$USERS`.</b>
 >> <b>In each profile, a second foreach loops executables from `$EXE` with:</b>
->>> <b>a regex case that checks for and removes prohibited executables,</b>     
->>> <b>a regex case that checks for and removes prohibited executable installers.</b>
+>>> - <b>a regex case that checks for and removes prohibited executables,</b>     
+>>> - <b>a regex case that checks for and removes prohibited executable installers.</b>
 >
 > <b>The third switch case checks for prohibited packages on the host.</b>
 
