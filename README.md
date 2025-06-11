@@ -4,13 +4,13 @@ With a service account in an AD security group granting administrator privileges
 I had been leveraging PowerShell scripts in Forescout policies for a few months when I realized that the script repository in Forescout was becoming cluttered, and version control was growing cumbersome. In those preceding months, I had been creating PowerShell scripts unique to each individual policy.   
 > \> Discover and track logged on users? Script.   
 > \> Discover and remove USB devices? Script.. for *each* USB device.   
-> \> Discover and unistall prohibited software? Script.. for *each* program.   
+> \> Discover and uninstall prohibited software? Script.. for *each* program.   
 > \> Track software versions? Scripts.    
 > \> And so on, and on, and on.    
 
 As you can imagine, this scaled terribly.   
 
-The 2 scripts in this repository are examples of my effort to deconflict Forescout Policy and the use of unique PowerShell scripts. I sought to create scripts which were modular and easily extendable to meet new requirements within their general use-cases. This boiled down to 2 scripts. One to manage installed or running software, and one to manage installed or active USB devices. This enabled Forescout policies to be reshaped as well, resulting in fewer scripts on clients being ran simultanously, or individually throughout a host's time on the network.   
+The 2 scripts in this repository are examples of my effort to deconflict Forescout Policy and the use of unique PowerShell scripts. I sought to create scripts which were modular and easily extendable to meet new requirements within their general use-cases. This boiled down to 2 scripts. One to manage installed or running software, and one to manage installed or active USB devices. This enabled Forescout policies to be reshaped as well, resulting in fewer scripts on clients being ran simultaneously, or individually throughout a host's time on the network.   
 
 ### [ 1 ] [APP_SwitchCase.ps1](https://github.com/plmcdowe/PowerShell-and-Forescout/blob/46b27bdb2193f8ee5286ae92a2f75d76491e80e8/APP_SwitchCase.ps1)
 The link above redirects to the script in this repository. The outline below demonstrates its use of Regex switch cases and general structure.      
